@@ -14,7 +14,8 @@ $cas_nombre=$rw['ape_pat'].' '.$rw['ape_mat'].' '.$rw['nombres'];
 $sql_3="SELECT * FROM cas_contratos INNER JOIN cargo_oprof ON cargo_oprof.cod_prof=cas_contratos.id_cargo WHERE idcas='".$id_cas."' ";
 $cons=pg_query($con,$sql_3);
 while ($row=pg_fetch_array($cons)) {
-    $cargo=$row['profesion']; //detmov.catdetalle
+    $cargo=$row['profesion'];
+    $tipcontrato=$row['tip_contrato'];  //detmov.catdetalle
 }
 
 
@@ -62,7 +63,7 @@ $table1->addCell(9000)->addText($cargo,null, array("spaceAfter"=>0));
 $table1->addRow();
 $table1->addCell(4500)->addText("CONDICIÓN",null, array("spaceAfter"=>0));
 $table1->addCell(1000)->addText(":",null, array("spaceAfter"=>0));
-$table1->addCell(9000)->addText("CONTRATO ADMINISTRATIVO DE SERVICIOS (CAS) LEY N°1057",null, array("spaceAfter"=>0));
+$table1->addCell(9000)->addText('CONTRATO ADMINISTRATIVO DE SERVICIOS (CAS) LEY N°1057 '.$tipcontrato,null, array("spaceAfter"=>0));
 
 $table1->addRow();
 $celda=$table1->addCell(4500)->addText("FECHA DE INGRESO",null, array("spaceAfter"=>0));
@@ -88,7 +89,7 @@ $row=pg_fetch_array($cons);
 
 
 $celda->addText('CONTRATO.-', array('bold' => true, 'underline' => 'single'), array("spaceAfter"=>0));
-$celda->addText('Contrato Administrativo de Servicios N° '.$nro_contr.', a partir del '.$new_f_ini.' al '.$new_f_fin.' ('.$tip_contrato.')',null, array("spaceAfter"=>0));
+$celda->addText('Contrato Administrativo de Servicios N° '.$nro_contr.', a partir del '.$new_f_ini.' al '.$new_f_fin.' '.$tip_contrato,null, array("spaceAfter"=>0));
 
 
 $sqla="SELECT * FROM cas_adenda WHERE id_contrato='".$id_contrato."' ";

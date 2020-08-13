@@ -36,7 +36,7 @@ $header->addImage('images/logo.jpg',
         'wrappingStyle' => 'behind'
     ));
 // Adding Text element to the Section having font styled by default...
-setlocale(LC_TIME, 'es_ES.UTF-8'); //Para convertir la fecha local en español :)
+setlocale(LC_TIME, 'spanish'); //Para convertir la fecha local en español :)
 $hoy=strftime("%d de %B de %Y");
 $year=date("Y");
 
