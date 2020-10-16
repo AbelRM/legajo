@@ -1,18 +1,18 @@
 ﻿<?php
-//$hostname="localhost";
-$hostname="192.160.0.75";
+$hostname = "localhost";
+// $hostname="192.160.0.75";
+// $hostname = "192.160.0.150";
+
 // $port="5232"; NO FUNCIONA
-$username="postgres";
-$password="123";
-$dbname="LEGAJO_LAP";
+$username = "postgres";
+$password = "123";
+$dbname = "LEGAJO_LAP";
 
-$con=pg_connect("host=$hostname user=$username password=$password dbname=$dbname");
+$con = pg_connect("host=$hostname user=$username password=$password dbname=$dbname");
 
-if(!$con)
-	echo "<p>Error de conexion</p>";
+if (!$con)
+  echo "<p>Error de conexion</p>";
 else
-	echo "Conexión exitosa";
+  echo "Conexión exitosa";
 
 // pg_close($con);  
-
-?>

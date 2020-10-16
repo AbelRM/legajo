@@ -49,9 +49,6 @@
 					<th>Nombres y Apellidos</th>
 					<th >DNI</th>
 					<th> </th>
-					<!-- <th><span class="pull-right">Cant.</span></th>
-					<th><span class="pull-right">Precio</span></th>
-					<th class='text-center' style="width: 36px;">Agregar</th> -->
 				</tr>
 				<?php
 				while ($row=pg_fetch_array($query)){

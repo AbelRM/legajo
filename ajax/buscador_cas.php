@@ -45,29 +45,22 @@
 					<th>Nombres y Apellidos</th>
 					<th >DNI</th>
 					<th> </th>
-					<!-- <th><span class="pull-right">Cant.</span></th>
-					<th><span class="pull-right">Precio</span></th>
-					<th class='text-center' style="width: 36px;">Agregar</th> -->
 				</tr>
 				<?php
 				while ($row=pg_fetch_array($query)){
-					// $oid= pg_field_type_oid($query, 0);
 					$cond=$row['cond'];
 					$nombres=$row['nombres'].' '.$row['ape_pat'].' '.$row['ape_mat'];
 					$dni=$row['dni'];
 					$id_cas=$row['id_cas'];
-					// $precio_venta=$row["precio"];
-					// $precio_venta=number_format($precio_venta,2,'.','');
 					?>
 					<tr>
 						<td><?php echo $cond; ?></td>
 						<td><?php echo $nombres; ?></td>
 						<td><?php echo $dni; ?></td>
 						<td> 
-						<form method="POST" action="cas_registro.php">
+							<form method="POST" action="cas_registro.php">
 								<input type="hidden" value="<?php echo $id_cas; ?>" name="id">
 								<button type="submit" class="btn btn-info btn-xs" ><i class="fa fa-eye"></i>&nbsp; Visualizar</button><p></p>
-
 							</form>
 
 							<form method="POST" action="cas_modificar.php">
@@ -76,10 +69,6 @@
 								</form></td>
 							</td>
 						</td>
-
-							
-						
-						
 
 						<!-- <td><textarea class="form-control" id="descrip_<?php echo $id_servicio;?>" cols="30" rows="3"></textarea></td>
 						<td class='col-xs-1'>

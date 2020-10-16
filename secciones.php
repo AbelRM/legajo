@@ -18,14 +18,8 @@
         <!-- Header-->
 
         <div class="content">
-
-
             <div class="animated fadeIn">
-
                 <div class="row">
-
-                    
-
                     <div class="col-md-12">
                         <div class="card row">
                             <div class="card-header col-xs-12">
@@ -75,8 +69,6 @@
                                     if ($rw['codtipacc']=='14001') {
                                         $f_nombr=$rw['fecefe'];
                                     }
-
-
                                 }
                                 ?>
 

@@ -47,7 +47,10 @@ $table1 = $section->addTable("table1"); // creamos la tabla
 $table1->addRow(); // agregamos una fila a la tabla
 $table1->addCell(4500)->addText("ASUNTO", null, array("spaceAfter" => 0));
 $table1->addCell(1000)->addText(":", null, array("spaceAfter" => 0)); // agregamos la columna 1
-$table1->addCell(9000)->addText("Vacaciones Truncas Personal CAS", null, array("spaceAfter" => 0)); // agregamos la columna 2
+$celda = $table1->addCell(9000);
+// $table1->addCell(9000)->addText("Renovación Contrato CAS", null, array("spaceAfter" => 0)); // agregamos la columna 2
+$celda->addText('Renovación Contrato CAS', null, array("spaceAfter" => 0));
+$celda->addText('Expediente con Registro N°', null, array("spaceAfter" => 0));
 
 $table1->addRow(); // agregamos otra fila pra los datos
 $table1->addCell(4500)->addText("APELLIDOS Y NOMBRES", null, array("spaceAfter" => 0));
@@ -226,7 +229,7 @@ $section->addText('YNJL.-', array('size' => 9));
 // $phpWord->getCompability()->setOoxmlVersion(15);
 
 header('Content-Type: application/octet-stream');
-header('Content-Disposition: attachment;filename="informe_vac_trun_' . $cas_nombre . '.docx"');
+header('Content-Disposition: attachment;filename="informe_reno_contr_' . $cas_nombre . '.docx"');
 
 // Saving the document as OOXML file...
 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');

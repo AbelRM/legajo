@@ -1,7 +1,5 @@
 <?php 
-
 include '../conexion_pg.php';
-
 
 $id_cas=$_POST['id'];
 
@@ -18,6 +16,7 @@ $dni=$_POST['dni'];
 $domic=$_POST['domic'];
 $cel=$_POST['cel'];
 $correo=$_POST['correo'];
+$fech_nac = $_POST['fech_nac'];
 
 $sql= "UPDATE cas_registro SET nombres='$nombres',
                 ape_pat='$ape_pat',
@@ -25,9 +24,8 @@ $sql= "UPDATE cas_registro SET nombres='$nombres',
                 dni='$dni', 
                 domic='$domic',
                 cel='$cel',
-                correo='$correo' WHERE id_cas='$id_cas'";
+                correo='$correo',
+                fech_nac='$fech_nac' WHERE id_cas='$id_cas'";
 
 $result=pg_query($con,$sql);
 header('Location: ../cas.php');
-
-?>
