@@ -4,8 +4,10 @@ header('Content-Disposition: attachment; filename=reporte.xls');
 
 include 'conexion_pg.php';
 
-$query = "SELECT * FROM contratos_sin_adenda LEFT JOIN cas_adenda ON contratos_sin_adenda.id_contrato = cas_adenda.id_contrato ORDER BY dni, contratos_sin_adenda.f_inicio ASC ";
-
+$query = "SELECT * FROM contratos_sin_adenda LEFT JOIN cas_adenda ON contratos_sin_adenda.id_contrato = cas_adenda.id_contrato WHERE dni='00134287' 
+ORDER BY dni, contratos_sin_adenda.f_inicio, cas_adenda.f_inicio asc ";
+"SELECT * FROM contratos_sin_adenda LEFT JOIN cas_adenda ON contratos_sin_adenda.id_contrato = cas_adenda.id_contrato 
+ORDER BY dni, contratos_sin_adenda.f_inicio, cas_adenda.f_inicio asc";
 
 $result = pg_query($con, $query);
 
@@ -48,54 +50,10 @@ $style = 'mso-number-format:"@";'
     <th style="background-color:#007bff; color:#fff;">Resolucion de Renuncia</th>
     <th style="background-color:#007bff; color:#fff;">Meta</th>
     <th style="background-color:#007bff; color:#fff;">Tipo de Adenda</th>
-
-    <th style="background-color:#007bff; color:#fff;">Nro Adenda</th>
-    <th style="background-color:#007bff; color:#fff;">Fecha Inicio</th>
-    <th style="background-color:#007bff; color:#fff;">Fecha Termino</th>
-    <th style="background-color:#007bff; color:#fff;">Resolucion de Renuncia</th>
-    <th style="background-color:#007bff; color:#fff;">Meta</th>
-    <th style="background-color:#007bff; color:#fff;">Tipo de Adenda</th>
-
-    <th style="background-color:#007bff; color:#fff;">Nro Adenda</th>
-    <th style="background-color:#007bff; color:#fff;">Fecha Inicio</th>
-    <th style="background-color:#007bff; color:#fff;">Fecha Termino</th>
-    <th style="background-color:#007bff; color:#fff;">Resolucion de Renuncia</th>
-    <th style="background-color:#007bff; color:#fff;">Meta</th>
-    <th style="background-color:#007bff; color:#fff;">Tipo de Adenda</th>
-
-    <th style="background-color:#007bff; color:#fff;">Nro Adenda</th>
-    <th style="background-color:#007bff; color:#fff;">Fecha Inicio</th>
-    <th style="background-color:#007bff; color:#fff;">Fecha Termino</th>
-    <th style="background-color:#007bff; color:#fff;">Resolucion de Renuncia</th>
-    <th style="background-color:#007bff; color:#fff;">Meta</th>
-    <th style="background-color:#007bff; color:#fff;">Tipo de Adenda</th>
-
-    <th style="background-color:#007bff; color:#fff;">Nro Adenda</th>
-    <th style="background-color:#007bff; color:#fff;">Fecha Inicio</th>
-    <th style="background-color:#007bff; color:#fff;">Fecha Termino</th>
-    <th style="background-color:#007bff; color:#fff;">Resolucion de Renuncia</th>
-    <th style="background-color:#007bff; color:#fff;">Meta</th>
-    <th style="background-color:#007bff; color:#fff;">Tipo de Adenda</th>
-
-    <th style="background-color:#007bff; color:#fff;">Nro Adenda</th>
-    <th style="background-color:#007bff; color:#fff;">Fecha Inicio</th>
-    <th style="background-color:#007bff; color:#fff;">Fecha Termino</th>
-    <th style="background-color:#007bff; color:#fff;">Resolucion de Renuncia</th>
-    <th style="background-color:#007bff; color:#fff;">Meta</th>
-    <th style="background-color:#007bff; color:#fff;">Tipo de Adenda</th>
-
-    <th style="background-color:#007bff; color:#fff;">Nro Adenda</th>
-    <th style="background-color:#007bff; color:#fff;">Fecha Inicio</th>
-    <th style="background-color:#007bff; color:#fff;">Fecha Termino</th>
-    <th style="background-color:#007bff; color:#fff;">Resolucion de Renuncia</th>
-    <th style="background-color:#007bff; color:#fff;">Meta</th>
-    <th style="background-color:#007bff; color:#fff;">Tipo de Adenda</th>
-
   </tr>
   <?php
-  $i = 1;
-  while ($row = pg_fetch_array($result))
-    $nro_contrato = $row['nro_contrato']; {
+  while ($row = pg_fetch_array($result)) {
+
   ?>
     <tr>
       <td><?php echo $row['nombres']; ?></td>
@@ -119,7 +77,6 @@ $style = 'mso-number-format:"@";'
       <td><?php echo $row['estruc1']; ?></td>
       <td><?php echo $row['estruc2']; ?></td>
       <td><?php echo $row['profesion']; ?></td>
-
       <td><?php echo $row['nro_adenda']; ?></td>
       <td><?php echo $row['f_inicio']; ?></td>
       <td><?php echo $row['f_termino']; ?></td>

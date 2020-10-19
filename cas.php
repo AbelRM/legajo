@@ -30,7 +30,6 @@
                 <a href="reporte.php"><button type="button" class="btn btn-success btn-xs" id="editar" style="margin: 1px;"><i class="fa fa-book"></i> Descargar Reporte</button></a>
               </div>
             </div>
-
             <div class="row">
               <div class="col-sm-12 col-lg-12 text-center"><br>
                 <div class="input-group">
@@ -45,10 +44,7 @@
 
               <div id="loader" style="position: absolute; text-align: center; top: 55px;  width: 100%;display:none;" class="col-sm-12 text-center"></div><!-- Carga gif animado -->
               <div class="col-sm-12 outer_div"></div><!-- Datos ajax Final -->
-
             </div>
-
-
           </div>
         </div>
       </div>
