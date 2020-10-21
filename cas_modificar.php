@@ -100,13 +100,7 @@
                   <i class="fa fa-plus"></i> Guardar
                 </button>
               </div>
-
             </form>
-
-
-
-
-
           </div>
         </div>
       </div>

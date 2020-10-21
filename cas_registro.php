@@ -5,9 +5,11 @@
 
 <body>
   <!-- Left Panel -->
-  <?php include 'aside.html';
+  <?php
+  include 'aside.html';
   include 'conexion_pg.php';
-  $id_cas = $_POST['id']; ?>
+  $id_cas = $_POST['id'];
+  ?>
 
   <!-- Left Panel -->
 
@@ -51,31 +53,39 @@
             }
             ?>
 
-            <div class="col-sm-12 col-md-12">
-              <!-- <p class="text-sm-left mt-2 mb-1">Datos del trabajador <?php echo $idmovim; ?></p> -->
-              <br><br>
-              <div class="row">
-                <div class="col-sm-12 col-md-6 table text-left">
-                  <p><b>Nombre:&nbsp;&nbsp;</b><?php echo $nombres; ?></p>
-                </div>
-                <div class="col-sm-12 col-md-3 table text-left">
-                  <p><b>DNI:&nbsp;&nbsp;</b><?php echo $dni; ?></p>
-                </div>
-                <div class="col-sm-12 col-md-3 table text-left">
-                  <p><b>Fech. Nac.:&nbsp;&nbsp;</b><?php echo $fech_nac; ?></p>
-                </div>
-                <div class="col-sm-12 col-md-6 table text-left">
-                  <p><b>Domicilio:&nbsp;&nbsp;</b><?php echo $domic; ?></p>
-                </div>
-                <div class="col-sm-12 col-md-6 table text-left">
-                  <p><b>Celular:&nbsp;&nbsp;</b><?php echo $cel; ?></p>
-                </div>
-                <div class="col-sm-12 table text-left">
-                  <p><b>Correo:&nbsp;&nbsp;</b><?php echo $correo; ?></p>
-                </div>
-              </div>
 
+            <!-- <p class="text-sm-left mt-2 mb-1">Datos del trabajador <?php echo $idmovim; ?></p> -->
+
+            <div class="row">
+              <div class="col-sm-12 col-md-6 table text-left">
+                <p><b>Nombre:&nbsp;&nbsp;</b><?php echo $nombres; ?></p>
+              </div>
+              <div class="col-sm-12 col-md-3 table text-left">
+                <p><b>DNI:&nbsp;&nbsp;</b><?php echo $dni; ?></p>
+              </div>
+              <div class="col-sm-12 col-md-3 table text-left">
+                <p><b>Fech. Nac.:&nbsp;&nbsp;</b><?php echo $fech_nac; ?></p>
+              </div>
+              <div class="col-sm-12 col-md-6 table text-left">
+                <p><b>Domicilio:&nbsp;&nbsp;</b><?php echo $domic; ?></p>
+              </div>
+              <div class="col-sm-12 col-md-6 table text-left">
+                <p><b>Celular:&nbsp;&nbsp;</b><?php echo $cel; ?></p>
+              </div>
+              <div class="col-sm-12 table text-left">
+                <p><b>Correo:&nbsp;&nbsp;</b><?php echo $correo; ?></p>
+              </div>
             </div>
+            <div class="row justify-content-end">
+              <div class="col-3">
+                <form method="POST" action="cas_modificar.php">
+                  <input type="hidden" value="<?php echo $id_cas; ?>" name="id">
+                  <button type="submit" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o"> </i>&nbsp; Modificar</button>
+                </form>
+
+              </div>
+            </div>
+
             <div class="secciones col-sm-12">
               <hr>
             </div>
@@ -92,6 +102,15 @@
               </div>
 
               <!-- Reportes -->
+              <select class="mdb-select md-form" multiple>
+                <option value="" disabled selected>Elegir </option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+              </select>
+              <label class="mdb-main-label">Example label</label>
+              <button class="btn-save btn btn-primary btn-sm">Elegir</button>
+
               <div class="col-md-6 text-right">
                 <form action="cas_informeVT.php" method="POST">
                   <input type="hidden" value="<?php echo $id_cas; ?>" id="id_cas" name="id_cas">
@@ -159,11 +178,11 @@
                           </small>
                         </td>
                         <td>
-                          <a href="#edit<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit">
-                            </span> Editar</a>&nbsp;
+                          <a href="#ver<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-success btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Ver folio</a>
 
-                          <a href="#delete<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash">
-                            </span> Elominar</a>
+                          <a href="#edit<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-warning btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
+
+                          <a href="#delete<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
 
                           <!-- include edit modal -->
                           <?php //include 'BorrarEditarModal.php' ; 
@@ -188,15 +207,20 @@
                         <tr>
                           <td>Nro adenda <br>Tipo de adenda <br> Plazo <br></td>
                           <td><?php echo $nro_aden; ?> <br> <small class="form-text text-muted"><?php echo $t_adenda; ?> <br>Desde el <?php echo $f_in; ?> hasta el <?php echo $f_fi; ?> <br> <?php echo $f_arenuncia; ?>
-
                               <?php
                               if ($r_arenuncia == '') {
                               } else {
                               ?> <br> <b>Renuncia : <?php echo $f_arenuncia; ?></b>
                               <?php
                               } ?>
+                            </small>
+                          </td>
+                          <td>
+                            <a href="#edit<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-warning btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>&nbsp;
 
-                            </small></td>
+                            <a href="#delete<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
+
+                          </td>
                         </tr>
                       <?php } ?>
                     </tbody>
@@ -212,6 +236,7 @@
     </div>
     <!-- /# column -->
   </div><!-- .content -->
+
   <!-- Ventana Editar Registros CRUD -->
   <div class="modal fade" id="myModalupdate<?php echo $id_contrato; ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -367,6 +392,11 @@
         $('#myInput').focus()
       });
     }
+
+    // Material Select Initialization
+    $(document).ready(function() {
+      $('.mdb-select').materialSelect();
+    });
   </script>
 </body>
 
