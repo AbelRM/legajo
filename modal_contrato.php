@@ -111,8 +111,15 @@
               </div>
             </div>
             <input type="hidden" id="id_cas" name="id_cas" value="<?php echo $id_cas; ?>">
+            <?php
+            include 'conexion_pg.php';
+            // $id_cas=$_POST['id_cas'];
+            $datoscomp = "SELECT * FROM cas_registro WHERE id_cas='" . $id_cas . "' ";
+            $resp = pg_query($con, $datoscomp);
+            $rw = pg_fetch_array($resp);
+            $dni = $rw['dni'];
+            ?>
             <input type="hidden" id="dni" name="dni" value="<?php echo $dni; ?>">
-
             <input type="hidden" id="f_reg" name="f_reg" value="<?php echo date('d/m/Y'); ?>">
 
           </div>

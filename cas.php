@@ -68,6 +68,7 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/cas_funciones.js"></script>
   <script src="assets/js/otros/jquery-3.2.1.min.js"></script>
+  <script src="assets/js/mdb.js"></script>
 
 
 </body>

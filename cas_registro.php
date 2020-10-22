@@ -50,6 +50,7 @@
               $cel = $rw['cel'];
               $correo = $rw['correo'];
               $fech_nac = $rw['fech_nac'];
+              $nacionalidad = $rw['nacionalidad'];
             }
             ?>
 
@@ -72,8 +73,11 @@
               <div class="col-sm-12 col-md-6 table text-left">
                 <p><b>Celular:&nbsp;&nbsp;</b><?php echo $cel; ?></p>
               </div>
-              <div class="col-sm-12 table text-left">
+              <div class="col-sm-12 col-md-6 table text-left">
                 <p><b>Correo:&nbsp;&nbsp;</b><?php echo $correo; ?></p>
+              </div>
+              <div class="col-sm-12 col-md-6 table text-left">
+                <p><b>Nacionalidad:&nbsp;&nbsp;</b><?php echo $nacionalidad; ?></p>
               </div>
             </div>
             <div class="row justify-content-end">
@@ -102,14 +106,14 @@
               </div>
 
               <!-- Reportes -->
-              <select class="mdb-select md-form" multiple>
+              <!-- <select class="mdb-select md-form" multiple>
                 <option value="" disabled selected>Elegir </option>
                 <option value="1">Option 1</option>
                 <option value="2">Option 2</option>
                 <option value="3">Option 3</option>
               </select>
               <label class="mdb-main-label">Example label</label>
-              <button class="btn-save btn btn-primary btn-sm">Elegir</button>
+              <button class="btn-save btn btn-primary btn-sm">Elegir</button> -->
 
               <div class="col-md-6 text-right">
                 <form action="cas_informeVT.php" method="POST">
@@ -136,6 +140,7 @@
                       <th scope="col">Cargo y ubicación</th>
                       <th scope="col">N° convocatoria</th>
                       <th scope="col">Plazo</th>
+                      <th scope="col">Fuente y meta</th>
                       <th scope="col">Acciones</th>
                     </tr>
                   </thead>
@@ -176,8 +181,15 @@
                             }
                             ?>
                           </small>
+
                         </td>
                         <td>
+                          <small style="font-weight:700;">Fuente: </small><?php echo $fuente; ?><br><small style="font-weight: 700;">Meta:</small> <?php echo $meta; ?><br><small style="font-weight:700;">Remuneración: </small><?php echo $remuneracion; ?>
+                        </td>
+
+                        <td>
+                          <!-- <a href="ver_pdf.php?id=<?php echo $row6['id_4puntos'] ?>&dni=<?php echo $dato_desencriptado ?>" target="_blank"><?php echo $row6['archivos']; ?></a> -->
+
                           <a href="#ver<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-success btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Ver folio</a>
 
                           <a href="#edit<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-warning btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
@@ -203,6 +215,7 @@
                         $t_adenda = $rw['tipo_adenda'];
                         $r_arenuncia = $rw['resol_renuncia'];
                         $f_arenuncia = $rw['f_renuncia'];
+                        $meta_adenda = $rw['meta'];
                       ?>
                         <tr>
                           <td>Nro adenda <br>Tipo de adenda <br> Plazo <br></td>
@@ -215,6 +228,7 @@
                               } ?>
                             </small>
                           </td>
+                          <td>Meta adenda: <?php echo $meta_adenda; ?> </td>
                           <td>
                             <a href="#edit<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-warning btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>&nbsp;
 
@@ -371,6 +385,7 @@
   <script src="assets/js/cas_funciones.js"></script>
   <script src="assets/js/otros/jquery-3.2.1.min.js"></script>
   <script src="assets/js/lib/chosen/chosen.jquery.min.js"></script>
+  <script src="assets/js/mdb.js"></script>
 
   <script>
     jQuery(document).ready(function() {

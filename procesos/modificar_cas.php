@@ -17,6 +17,7 @@ $domic = $_POST['domic'];
 $cel = $_POST['cel'];
 $correo = $_POST['correo'];
 $fech_nac = $_POST['fech_nac'];
+$nacionalidad = $_POST['nacionalidad'];
 
 $sql = "UPDATE cas_registro SET nombres='$nombres',
                 ape_pat='$ape_pat',
@@ -25,7 +26,8 @@ $sql = "UPDATE cas_registro SET nombres='$nombres',
                 domic='$domic',
                 cel='$cel',
                 correo='$correo',
-                fech_nac='$fech_nac' WHERE id_cas='$id_cas'";
+                fech_nac='$fech_nac',
+                nacionalidad = '$nacionalidad' WHERE id_cas='$id_cas'";
 
 $result = pg_query($con, $sql);
-header('Location: ../cas_registro.php');
+header('Location: ../cas.php');

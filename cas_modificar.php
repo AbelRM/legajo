@@ -95,6 +95,23 @@
                 <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">Fecha Nac.</label></div>
                 <div class="col-12 col-md-3"><input type="date" name="fech_nac" value="<?php echo $fech_nac; ?>" class="form-control" required></div>
               </div>
+              <div class="row form-group">
+                <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">Nacionalidad</label></div>
+                <div class="col-12 col-md-3">
+                  <select name="nacionalidad" id="nacionalidad" class="form-control">
+                    <option value="">Selecciona...</option>
+                    <option value="PERU">PERÚ</option>
+                    <option value="VENEZUELA">VENEZUELA</option>
+                    <option value="BRASIL">BRASIL</option>
+                    <option value="COLOMBIA">COLOMBIA</option>
+                    <option value="ECUADOR">ECUADOR</option>
+                    <option value="CHILE">CHILE</option>
+                    <option value="BOLIVIA">BOLIVIA</option>
+                    <option value="ESPANA">ESPAÑA</option>
+                    <option value="ARGENTINA">ARGENTINA</option>
+                  </select>
+                </div>
+              </div>
               <div class="text-right">
                 <button type="submit" class="btn btn-primary btn-sm">
                   <i class="fa fa-plus"></i> Guardar

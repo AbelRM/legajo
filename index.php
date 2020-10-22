@@ -15,7 +15,8 @@
 
   <link rel="stylesheet" href="assets/css/normalize.min.css">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="assets/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="assets/css/themify-icons.css">
   <link rel="stylesheet" href="assets/css/pe-icon-7-stroke.min.css">
   <link rel="stylesheet" href="assets/css/flag-icon.min.css">
