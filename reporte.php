@@ -4,7 +4,7 @@ header('Content-Disposition: attachment; filename=reporte.xls');
 
 include 'conexion_pg.php';
 
-$query = "SELECT * FROM contratos_sin_adenda LEFT JOIN cas_adenda ON contratos_sin_adenda.id_contrato = cas_adenda.id_contrato WHERE dni='00134287' 
+$query = "SELECT * FROM contratos_sin_adenda LEFT JOIN cas_adenda ON contratos_sin_adenda.id_contrato = cas_adenda.id_contrato 
 ORDER BY dni, contratos_sin_adenda.f_inicio, cas_adenda.f_inicio asc ";
 "SELECT * FROM contratos_sin_adenda LEFT JOIN cas_adenda ON contratos_sin_adenda.id_contrato = cas_adenda.id_contrato 
 ORDER BY dni, contratos_sin_adenda.f_inicio, cas_adenda.f_inicio asc";
