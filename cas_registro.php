@@ -25,6 +25,7 @@
     include 'modal_rcontrato.php';
     include 'modal_radenda.php';
 
+
     ?>
     <!-- Header-->
 
@@ -188,18 +189,15 @@
                         </td>
 
                         <td>
-                          <!-- <a href="ver_pdf.php?id=<?php echo $row6['id_4puntos'] ?>&dni=<?php echo $dato_desencriptado ?>" target="_blank"><?php echo $row6['archivos']; ?></a> -->
+                          <form method="POST" action="modal_editarCAS.php">
+                            <input type="hidden" value="<?php echo $id_contrato; ?>" name="id_contrato">
+                            <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
+                          </form>
 
                           <a href="#ver<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-success btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Ver folio</a>
 
-                          <a href="#edit<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-warning btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
-
                           <a href="#delete<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
 
-                          <!-- include edit modal -->
-                          <?php //include 'BorrarEditarModal.php' ; 
-                          ?>
-                          <!-- End -->
                         </td>
 
                       </tr>
