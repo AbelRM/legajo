@@ -98,7 +98,7 @@
             <!-- --------------------------------------------------------------------------------------------------------- -->
 
             <div class="row">
-              <div class="col-md-6 text-center">
+              <div class="col-md-5 text-center">
                 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#contrato"><i class="fa fa-lightbulb-o"></i>&nbsp; Agregar contrato</button>
                 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#adenda"><i class="fa fa-lightbulb-o"></i>&nbsp; Agregar adenda</button>
                 <br><br><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#fin_contrato"><i class="fa fa-lightbulb-o"></i>&nbsp; Fin contrato</button>
@@ -116,10 +116,26 @@
               <label class="mdb-main-label">Example label</label>
               <button class="btn-save btn btn-primary btn-sm">Elegir</button> -->
 
-              <div class="col-md-6 text-right">
+              <div class="col-md-7 text-right">
                 <form action="cas_informeVT.php" method="POST">
-                  <input type="hidden" value="<?php echo $id_cas; ?>" id="id_cas" name="id_cas">
-                  <button type="submit" class="btn btn-secondary btn-sm"><i class="fa fa-lightbulb-o"></i>&nbsp; Informe V.T.</button>
+                  <div class="row">
+                    <div class="col col-md-4"><label for="selectSm" class=" form-control-label">Elegir N° contrato:</label></div>
+                    <div class="col-12 col-md-4">
+                      <select name="nro_contrato" id="nro_contrato" class="form-control-sm form-control">
+                        <?php
+                        $consulta = "SELECT * FROM cas_contratos WHERE idcas = '$id_cas'";
+                        $resultado = pg_query($con, $consulta);
+                        while ($array = pg_fetch_array($resultado)) {
+                          echo "<option value=" . $array["id_contrato"] . ">" . $array["nro_contrato"] . "</option> ";
+                        }
+                        ?>
+                      </select>
+                    </div>
+                    <input type="hidden" value="<?php echo $id_cas; ?>" id="id_cas" name="id_cas">
+                    <div class="col-md-4">
+                      <button type="submit" class="btn btn-secondary btn-sm"><i class="fa fa-lightbulb-o"></i>&nbsp; Informe V.T.</button>
+                    </div>
+                  </div>
                 </form> <br>
 
                 <form action="cas_informeRC.php" method="POST">

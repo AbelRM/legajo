@@ -138,6 +138,20 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                   <div class="row form-group">
+                    <div class="col col-md-5"><label for="selectSm" class=" form-control-label">Fecha Renuncia</label></div>
+                    <div class="col-12 col-md-7"><input type="date" id="f_renuncia" name="f_renuncia" value="<?php echo $row['f_renuncia']; ?>" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="row form-group">
+                    <div class="col col-md-5"><label for="selectSm" class=" form-control-label">Resol. Renuncia</label></div>
+                    <div class="col-12 col-md-7"><input type="text" id="resol_renuncia" name="resol_renuncia" value="<?php echo $row['resol_renuncia']; ?>" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="row form-group">
                     <div class="col col-md-3"><label class=" form-control-label">Subir archivo</label></div>
                     <div class="col-12 col-md-9">
                       <input type="file" id="archivo" name="archivo" accept=".pdf">

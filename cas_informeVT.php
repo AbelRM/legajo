@@ -3,6 +3,7 @@ require_once 'phpword/vendor/autoload.php';
 include 'conexion_pg.php';
 
 $id_cas = $_POST['id_cas'];
+$nro_contrato = $_POST['nro_contrato'];
 
 $cons = "SELECT * FROM cas_registro   where id_cas='" . $id_cas . "' ";
 $query = pg_query($con, $cons);
@@ -68,12 +69,12 @@ $table1->addRow();
 $celda = $table1->addCell(4500)->addText("FECHA DE INGRESO", null, array("spaceAfter" => 0));
 $table1->addCell(1000)->addText(":", null, array("spaceAfter" => 0));
 $celda = $table1->addCell(9000);
-$sql1 = "SELECT id_contrato from cas_contratos where idcas=$id_cas order by f_inicio desc";
-$c = pg_query($con, $sql1);
-$row = pg_fetch_array($c);
-$id_contrato = $row['id_contrato'];
+// $sql1 = "SELECT id_contrato from cas_contratos where idcas=$id_cas order by f_inicio desc";
+// $c = pg_query($con, $sql1);
+// $row = pg_fetch_array($c);
+// $id_contrato = $row['id_contrato'];
 
-$sql = "SELECT * FROM cas_contratos WHERE id_contrato='" . $id_contrato . "' ";
+$sql = "SELECT * FROM cas_contratos WHERE id_contrato='" . $nro_contrato . "' ";
 $cons = pg_query($con, $sql);
 $row = pg_fetch_array($cons);
 $nro_contr = $row['nro_contrato']; //detmov.catdetalle
@@ -91,7 +92,7 @@ $celda->addText('CONTRATO.-', array('bold' => true, 'underline' => 'single'), ar
 $celda->addText('Contrato Administrativo de Servicios N° ' . $nro_contr . ', a partir del ' . $new_f_ini . ' al ' . $new_f_fin . ' ' . $tip_contrato, null, array("spaceAfter" => 0));
 
 
-$sqla = "SELECT * FROM cas_adenda WHERE id_contrato='" . $id_contrato . "' ";
+$sqla = "SELECT * FROM cas_adenda WHERE id_contrato='" . $nro_contrato . "' ";
 $a = pg_query($con, $sqla);
 $rw = pg_fetch_array($a);
 $nro_adend = $rw['nro_adenda'];
@@ -107,7 +108,7 @@ if ($nro_adend == '') {
   $celda->addText('REGISTRA.-', array('bold' => true, 'underline' => 'single'), array("spaceAfter" => 0));
   $celda->addText('Adendas al Contrato Administrativo de Servicios N° ' . $nro_contr, null, array("spaceAfter" => 0));
 
-  $sqla = "SELECT * FROM cas_adenda WHERE id_contrato='" . $id_contrato . "' ";
+  $sqla = "SELECT * FROM cas_adenda WHERE id_contrato='" . $nro_contrato . "' ";
   $a = pg_query($con, $sqla);
   while ($rw = pg_fetch_array($a)) {
     # code...
@@ -125,8 +126,8 @@ if ($nro_adend == '') {
 }
 
 // ----------------------renuncia
-
-$cons = pg_query($con, "SELECT * from cas_contratos where idcas=$id_cas order by id_contrato desc ");
+$cons = pg_query($con, "SELECT * from cas_contratos where id_contrato = '$nro_contrato' ");
+// $cons = pg_query($con, "SELECT * from cas_contratos where idcas=$id_cas order by id_contrato desc ");
 $res = pg_fetch_array($cons);
 $r_renun = $row['resol_renuncia'];
 $f_renun = $row['f_renuncia'];
@@ -154,7 +155,7 @@ $r_renun = $row['resol_renuncia'];
 $f_renun = $row['f_renuncia'];
 $id_contra = $row['id_contrato'];
 
-$sql2 = pg_query($con, "SELECT * from cas_contratos WHERE id_contrato=$id_contrato ");
+$sql2 = pg_query($con, "SELECT * from cas_contratos WHERE id_contrato=$nro_contrato ");
 $r = pg_fetch_array($sql2);
 $num_contr = $r['nro_contrato'];
 
@@ -207,7 +208,7 @@ $table1->addRow();
 $celda = $table1->addCell(4500)->addText("UBICACIÓN", null, array("spaceAfter" => 0));
 $table1->addCell(1000)->addText(":", null, array("spaceAfter" => 0));
 $celda = $table1->addCell(9000);
-$sql2 = "SELECT * FROM t_ubicas INNER JOIN cas_contratos ON cas_contratos.cod_ubic=t_ubicas.codofic WHERE id_contrato='" . $id_contrato . "' ";
+$sql2 = "SELECT * FROM t_ubicas INNER JOIN cas_contratos ON cas_contratos.cod_ubic=t_ubicas.codofic WHERE id_contrato='" . $nro_contrato . "' ";
 $cons2 = pg_query($con, $sql2);
 $row = pg_fetch_array($cons2);
 $dir_ejec = $row['estruc1'];
