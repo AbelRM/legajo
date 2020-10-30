@@ -4,6 +4,11 @@ include 'conexion_pg.php';
 
 $id_cas = $_POST['id_cas'];
 $nro_contrato = $_POST['nro_contrato'];
+$fech_registro_vt = $_POST['fech_registro_vt'];
+$estado_vt = $_POST['estado_vt'];
+
+$update = "UPDATE cas_contratos SET estado_vt='$estado_vt',fech_registro_vt='$fech_registro_vt' WHERE id_contrato = '$nro_contrato'";
+$actualizar = pg_query($con, $update);
 
 $cons = "SELECT * FROM cas_registro   where id_cas='" . $id_cas . "' ";
 $query = pg_query($con, $cons);

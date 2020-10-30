@@ -42,17 +42,17 @@
                 <div class="col-12 col-md-2"><input type="text" id="dni" name="dni" class="form-control" maxlength="9" minlength="8" required></div>
 
                 <div class="col col-md-2"><label for="disabled-input" class=" form-control-label">Fecha Nac.</label></div>
-                <div class="col-12 col-md-2"><input type="date" style="font-size: 11px;" id="fech_nac" name="fech_nac" class="form-control" required></div>
+                <div class="col-12 col-md-2"><input type="date" style="font-size: 11px;" id="fech_nac" name="fech_nac" class="form-control"></div>
               </div>
               <div class="row form-group">
                 <div class="col col-md-1"><label for="disabled-input" class=" form-control-label">Domicilio</label></div>
-                <div class="col-12 col-md-4"><input type="text" id="domic" name="domic" class="form-control" required></div>
+                <div class="col-12 col-md-4"><input type="text" id="domic" name="domic" class="form-control"></div>
 
                 <div class="col col-md-1"><label for="disabled-input" class=" form-control-label">Correo</label></div>
-                <div class="col-12 col-md-3"><input type="email" id="correo" name="correo" class="form-control" placeholder="example@example.com" required></div>
+                <div class="col-12 col-md-3"><input type="email" id="correo" name="correo" class="form-control" placeholder="example@example.com"></div>
 
                 <div class="col col-md-1"><label for="disabled-input" class=" form-control-label">Celular</label></div>
-                <div class="col-12 col-md-2"><input type="text" id="cel" name="cel" class="form-control" maxlength="9" minlength="9" required></div>
+                <div class="col-12 col-md-2"><input type="text" id="cel" name="cel" class="form-control" maxlength="9" minlength="9"></div>
               </div>
             </div>
             <div class="text-right">

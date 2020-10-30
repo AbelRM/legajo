@@ -56,15 +56,15 @@ if ($action == 'ajax') {
             <td><?php echo $nombres; ?></td>
             <td><?php echo $dni; ?></td>
             <td>
-              <form method="POST" action="cas_registro.php">
+              <form method="POST" action="cas_registro.php?id=<?php echo $id_cas; ?>">
                 <input type="hidden" value="<?php echo $id_cas; ?>" name="id">
-                <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-eye"></i>&nbsp; Visualizar</button>
+                <button type="submit" class="btn btn-info"><i class="fa fa-eye"></i>&nbsp; Visualizar</button>
                 <p></p>
               </form>
 
-              <form method="POST" action="cas_modificar.php">
+              <form method="POST" action="cas_modificar.php?id=<?php echo $id_cas; ?>">
                 <input type="hidden" value="<?php echo $id_cas; ?>" name="id">
-                <button type="submit" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o"> </i>&nbsp; Modificar</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-pencil-square-o"> </i>&nbsp; Modificar</button>
               </form>
             </td>
 

@@ -102,7 +102,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-12">
               <div class="row form-group">
                 <div class="col col-md-3"><label class=" form-control-label">Subir archivo</label></div>
                 <div class="col-12 col-md-9">
@@ -112,7 +112,7 @@
             </div>
             <input type="hidden" id="id_cas" name="id_cas" value="<?php echo $id_cas; ?>">
             <?php
-            include 'conexion_pg.php';
+            // include 'conexion_pg.php';
             // $id_cas=$_POST['id_cas'];
             $datoscomp = "SELECT * FROM cas_registro WHERE id_cas='" . $id_cas . "' ";
             $resp = pg_query($con, $datoscomp);

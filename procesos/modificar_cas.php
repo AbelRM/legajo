@@ -30,4 +30,4 @@ $sql = "UPDATE cas_registro SET nombres='$nombres',
                 nacionalidad = '$nacionalidad' WHERE id_cas='$id_cas'";
 
 $result = pg_query($con, $sql);
-header('Location: ../cas.php');
+header("Location: ../cas_registro.php?id=$id_cas");

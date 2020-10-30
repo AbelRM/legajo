@@ -3,8 +3,11 @@ require_once 'phpword/vendor/autoload.php';
 include 'conexion_pg.php';
 
 $id_cas = $_POST['id_cas'];
+// $nro_contrato = $_POST['nro_contrato'];
+$fech_registro_ct = $_POST['fech_registro_ct'];
 
-// echo $referencia_adj;
+
+
 $cons = "SELECT * FROM cas_registro   where id_cas='" . $id_cas . "' ";
 $query = pg_query($con, $cons);
 while ($rw = pg_fetch_array($query)) {
@@ -66,6 +69,12 @@ while ($row = pg_fetch_array($cons)) {
   $r_renun = $row['resol_renuncia'];
   $fe_renun = $row['f_renuncia'];
   $new_fe_renun = date("d-m-Y", strtotime($fe_renun));
+  $id_contrato = $row['id_contrato'];
+
+  $estado_rc = 'REGISTRADO';
+
+  $update = "UPDATE cas_contratos SET estado_ct='$estado_rc',fecha_registro_ct='$fech_registro_ct' WHERE id_contrato = '$id_contrato'";
+  $actualizar = pg_query($con, $update);
 
   $section->addText('- Contrato Administrativo de Servicios N° ' . $num_cont . ', a partir del ' . $new_f_ini . ' al ' . $new_f_fin . ' - ' . $ofic_ . ', ubicado en la ' . $ofic . ' de la Dirección Regional de Salud Tacna.', array('size' => 12), array("align" => "both"));
 
@@ -102,7 +111,6 @@ while ($row = pg_fetch_array($cons)) {
     $section->addText('- Resolución N° ' . $r_renun . ' al Contrato Administrativo de Servicios N°' . $num_cont . ' Extinguir el Contrato Administrativo de Renovación de Contrato por renuncia irrevocable a partir del ' . $new_fe_renun . ' de la ' . $ofic . ' - ' . $ofic_ . ' de la Dirección Regional de Salud Tacna.', array('size' => 12), array("align" => "both"));
   }
 }
-
 
 $section->addText('SE EXPIDE LA PRESENTE CONSTANCIA, EN MÉRITO A LO SEÑALADO EN LA CLÁUSULA DÉCIMO OCTAVA DEL RESPECTIVO CONTRATO Y DE ACUERDO A LAS FACULTADES DELEGADAS MEDIANTE RESOLUCIÓN DIRECTORAL N°0808-2008-DEGDRRHH-DG/GOB.REG.TACNA, Y A SOLICITUD DEL INTERESADO, NO TENIENDO VALOR OFICIAL PARA ACCIÓN JUDICIAL CONTRA EL ESTADO.', array('size' => 12), array("align" => "both"));
 

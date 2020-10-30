@@ -46,22 +46,18 @@ $id_contrato = $row['last'] + 1;
 //   echo "La extensión o el tamaño de los archivos no es correcta. <br><br><table><tr><td><li>Solo se permiten archivos .pdf<br><li>se permiten archivos de 3 Mb máximo.</td></tr></table>";
 // } else {
 // if (move_uploaded_file($_FILES['archivo']['tmp_name'], $micarpeta . $nombre_archivo)) {
-$sql = "INSERT INTO cas_contratos ( idcas, nro_contrato, f_inicio, f_termino, remuner, fuente,nro_convocatoria, cod_ubic, id_cargo, id_contrato, meta, tip_contrato, f_registro) 
+$sql = "INSERT INTO cas_contratos ( idcas, nro_contrato, f_inicio, f_termino, remuner, fuente,nro_convocatoria, cod_ubic, id_cargo, id_contrato, meta, tip_contrato, f_registro, estado_vt, estado_rc, estado_ct) 
   
-  VALUES ('" . $id_cas . "','" . $nro_cas . "', '$f_inicio', '$f_fin' ,'" . $remun . "','" . $fuente . "','" . $nro_convocatoria . "','" . $ubicacion . "','" . $id_cargo . "','" . $id_contrato . "','" . $meta . "','" . $tip_contrato . "','" . $f_registro . "')";
+  VALUES ('" . $id_cas . "','" . $nro_cas . "', '$f_inicio', '$f_fin' ,'" . $remun . "','" . $fuente . "','" . $nro_convocatoria . "','" . $ubicacion . "','" . $id_cargo . "','" . $id_contrato . "','" . $meta . "','" . $tip_contrato . "','" . $f_registro . "','NO REGISTRADO', 'NO REGISTRADO', 'NO REGISTRADO')";
 
 $result = pg_query($con, $sql);
 if ($result) {
-  echo '<script> 
-    window.history.back(-1);
-    location.reload();
-    </script>';
 
-  // header("Location: ../cas_registro.php);
-  // pg_close($con);
+
+  header("Location: ../cas_registro.php?id=$id_cas");
 } else {
-  echo '<script> alert("Error al guardar la información"); </script>';
-  pg_close($con);
+  echo '<script> alert("Error al guardar la información");
+  window.history.back(-1); </script>';
 }
 // } else {
 //   echo "Ocurrió algún error al subir el fichero. No pudo guardarse.";

@@ -2,16 +2,15 @@
 
 include '../conexion_pg.php';
 $id_contrato = $_POST['id_contrato'];
-$nro_cantrato = $_POST['nro_cantrato'];
-$profesion_edit = $_POST['profesion_edit'];
-$ubicacion_cas_edit = $_POST['ubicacion_cas_edit'];
+echo $id_contrato;
+$id_adenda = $_POST['id_adenda'];
+$nro_adenda = $_POST['nro_adenda'];
+$tipo_dadenda_editar = $_POST['tipo_dadenda_editar'];
 $f_inicio = $_POST['f_inicio'];
 $f_termino = $_POST['f_termino'];
-$remuneracion = $_POST['remuneracion'];
 $fuente = $_POST['fuente'];
 $meta = $_POST['meta'];
-$tipo_contrato_edit = $_POST['tipo_contrato_edit'];
-$nro_convocatoria = $_POST['nro_convocatoria'];
+$tipo_adenda_edit = $_POST['tipo_adenda_edit'];
 $f_renuncia = $_POST['f_renuncia'];
 $resol_renuncia = $_POST['resol_renuncia'];
 // $dni = $_POST['dni'];
@@ -48,10 +47,10 @@ $f_registro = $_POST['f_registro'];
 // } else {
 // if (move_uploaded_file($_FILES['archivo']['tmp_name'], $micarpeta . $nombre_archivo)) {
 if ($resol_renuncia == null) {
-  $sql = "UPDATE cas_contratos SET nro_contrato='$nro_cantrato',f_inicio='$f_inicio',f_termino='$f_termino',remuner='$remuneracion', 
-  fuente='$fuente', nro_convocatoria='$nro_convocatoria',cod_ubic='$ubicacion_cas_edit', id_cargo = '$profesion_edit', meta='$meta', 
-  tip_contrato = '$tipo_contrato_edit', f_registro = '$f_registro'
-  WHERE id_contrato='$id_contrato'";
+  $sql = "UPDATE cas_adenda SET nro_adenda='$nro_adenda',f_inicio='$f_inicio',f_termino='$f_termino',id_tadenda='$tipo_dadenda_editar',
+  fuente='$fuente', meta='$meta', 
+  tip_adenda = '$tipo_adenda_edit', f_registro = '$f_registro'
+  WHERE id_adenda='$id_adenda'";
 
   $result = pg_query($con, $sql);
 
@@ -67,10 +66,10 @@ if ($resol_renuncia == null) {
     // pg_close($con);
   }
 } else {
-  $sql = "UPDATE cas_contratos SET nro_contrato='$nro_cantrato',f_inicio='$f_inicio',f_termino='$f_termino',remuner='$remuneracion', 
-  fuente='$fuente', nro_convocatoria='$nro_convocatoria', id_cargo = '$profesion_edit', f_renuncia='$f_renuncia', meta='$meta', 
-  resol_renuncia = '$resol_renuncia', tip_contrato = '$tipo_contrato_edit', f_registro = '$f_registro'
-  WHERE id_contrato='$id_contrato'";
+  $sql = "UPDATE cas_adenda SET nro_adenda='$nro_adenda',f_inicio='$f_inicio',f_termino='$f_termino',id_tadenda='$tipo_dadenda_editar', f_renuncia = '$f_renuncia'
+  fuente='$fuente', resol_renuncia = '$resol_renuncia', meta='$meta', 
+  tip_adenda = '$tipo_adenda_edit', f_registro = '$f_registro'
+  WHERE id_adenda='$id_adenda'";
 
   $result = pg_query($con, $sql);
 

@@ -8,8 +8,7 @@
   <?php
   include 'aside.html';
   include 'conexion_pg.php';
-  $id_contrato = $_POST['id_contrato'];
-  echo $id_contrato;
+  $id_adenda = $_POST['id_adenda'];
   ?>
 
   <!-- Left Panel -->
@@ -29,53 +28,47 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header">
-            <h4>Editar contrato</h4>
+            <h4>Editar modal</h4>
           </div>
           <?php
-          $consulta = "SELECT * FROM cas_contratos INNER JOIN t_ubicas ON t_ubicas.codofic=cas_contratos.cod_ubic 
-											INNER JOIN cargo_oprof ON cargo_oprof.cod_prof=cas_contratos.id_cargo WHERE id_contrato='" . $id_contrato . "' ";
+
+          $consulta = "SELECT * FROM cas_adenda INNER JOIN cas_contratos ON cas_adenda.id_contrato = cas_contratos.id_contrato WHERE id_adenda='" . $id_adenda . "' ";
           $resp = pg_query($con, $consulta);
-          $row = pg_fetch_array($resp);
+          $array = pg_fetch_array($resp);
+
+          $sql = "SELECT * FROM cas_adenda WHERE id_adenda='" . $id_adenda . "' ";
+          $respuesta = pg_query($con, $sql);
+          $row = pg_fetch_array($respuesta);
 
           ?>
           <div class="card-body">
-            <form action="procesos/actualizar_contrato.php" method="POST" enctype="multipart/form-data" class="form-horizontal">
+            <form action="procesos/actualizar_adenda.php" method="POST" enctype="multipart/form-data" class="form-horizontal">
               <div class="row">
                 <div class="col-sm-12 col-md-6">
                   <div class="row form-group">
-                    <div class="col col-md-3"><label for="selectSm" class=" form-control-label">CAS N°</label></div>
-                    <div class="col-12 col-md-9"><input type="text" id="nro_cantrato" name="nro_cantrato" value="<?php echo $row['nro_contrato']; ?>" class="form-control">
-                    </div><br><br>
+                    <div class="col col-md-3"><label for="selectSm" class=" form-control-label">Contrato N°</label></div>
+                    <div class="col-12 col-md-9"><input type="text" value="<?php echo $array['nro_contrato']; ?>" class="form-control" disabled>
+                    </div>
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
                   <div class="row form-group">
-                    <div class="col col-md-3"><label for="selectSm" class=" form-control-label">Cargo</label></div>
-                    <div class="col-12 col-md-9">
-                      <?php $profesion = $row['cod_prof']; ?>
-                      <select name="profesion_edit" id="profesion_edit" class="form-control-sm form-control">
-                        <?php
-                        $sql = "SELECT * FROM cargo_oprof";
-                        $res = pg_query($con, $sql);
-                        while ($rw = pg_fetch_array($res)) {
-                          echo "<option value=" . $rw["cod_prof"] . ">" . $rw["profesion"] . "</option> ";
-                        }
-                        ?>
-                      </select>
+                    <div class="col col-md-3"><label for="selectSm" class=" form-control-label">Adenda N°</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="nro_adenda" name="nro_adenda" value="<?php echo $row['nro_adenda']; ?>" class="form-control">
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-12 col-md-12">
+                <div class="col-sm-12 col-md-6">
                   <div class="row form-group">
-                    <div class="col col-md-2"><label for="selectSm" class=" form-control-label">Ubicación</label></div>
-                    <div class="col-md-10">
-                      <?php $ubicacion_edit = $row['codofic']; ?>
-                      <select name="ubicacion_cas_edit" id="ubicacion_cas_edit" class="form-control standardSelect">
+                    <div class="col col-md-3"><label for="selectSm" class=" form-control-label">Tipo de adenda</label></div>
+                    <div class="col-12 col-md-9">
+                      <?php $tipo_dadenda = $row['id_tadenda']; ?>
+                      <select name="tipo_dadenda_editar" id="tipo_dadenda_editar" class="form-control-sm form-control">
                         <?php
-                        $sql = "SELECT * FROM t_ubicas";
+                        $sql = "SELECT * FROM cas_tadenda";
                         $res = pg_query($con, $sql);
                         while ($rw = pg_fetch_array($res)) {
-                          echo "<option value=" . $rw["codofic"] . ">" . $rw["oficestr"] . " - " . $rw["estruc1"] . "</option> ";
+                          echo "<option value=" . $rw["id_tadenda"] . ">" . $rw["tipo_adenda"] . "</option> ";
                         }
                         ?>
                       </select>
@@ -98,13 +91,6 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                   <div class="row form-group">
-                    <div class="col col-md-5"><label for="selectSm" class=" form-control-label">Remuneración</label></div>
-                    <div class="col-12 col-md-7"><input type="text" id="remuneracion" name="remuneracion" value="<?php echo $row['remuner']; ?>" class="form-control">
-                    </div><br><br>
-                  </div>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                  <div class="row form-group">
                     <div class="col col-md-5"><label for="selectSm" class=" form-control-label">Fuente</label></div>
                     <div class="col-12 col-md-7"><input type="text" id="fuente" name="fuente" style="font-size:14px;" value="<?php echo $row['fuente']; ?>" class="form-control">
                     </div><br><br>
@@ -119,20 +105,13 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                   <div class="row form-group">
-                    <div class="col col-md-5"><label for="selectSm" class=" form-control-label">Tipo contrato</label></div>
+                    <div class="col col-md-5"><label for="selectSm" class=" form-control-label">Tipo adenda</label></div>
                     <div class="col-12 col-md-7">
-                      <?php $tip_contrato = $row['tip_contrato']; ?>
-                      <select class="form-control" id="tipo_contrato_edit" name="tipo_contrato_edit">
+                      <?php $tip_adenda = $row['tip_adenda']; ?>
+                      <select class="form-control" id="tipo_adenda_edit" name="tipo_adenda_edit">
                         <option value="">Contrato Regular</option>
-                        <option value="(COVID-19)">Contrato Covid</option>
+                        <option value="COVID-19">Contrato Covid</option>
                       </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                  <div class="row form-group">
-                    <div class="col col-md-5"><label for="selectSm" class=" form-control-label">N° convocatoria</label></div>
-                    <div class="col-12 col-md-7"><input type="text" id="nro_convocatoria" name="nro_convocatoria" value="<?php echo $row['nro_convocatoria']; ?>" class="form-control">
                     </div>
                   </div>
                 </div>
@@ -150,7 +129,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-12 col-md-6">
+                <div class="col-sm-12 col-md-12">
                   <div class="row form-group">
                     <div class="col col-md-3"><label class=" form-control-label">Subir archivo</label></div>
                     <div class="col-12 col-md-9">
@@ -159,7 +138,8 @@
                   </div>
                 </div>
                 <input type="hidden" id="f_registro" name="f_registro" value="<?php echo date('d/m/Y'); ?>">
-                <input type="hidden" name="id_contrato" value="<?php echo $id_contrato; ?>">
+                <input type="hidden" name="id_adenda" value="<?php echo $id_adenda; ?>">
+                <input type="hidden" name="id_contrato" value="<?php echo $row['id_contrato']; ?>">
               </div>
               <div class="modal-footer">
                 <a href="javascript: history.go(-1)" type="button" class="btn btn-light">Cancelar</a>
@@ -203,9 +183,8 @@
   </script>
   <script>
     $(document).ready(function() {
-      $('#profesion_edit > option[value="<?php echo $profesion ?>"]').attr('selected', 'selected');
-      $('#tipo_contrato_edit > option[value="<?php echo $tip_contrato ?>"]').attr('selected', 'selected');
-      $('#ubicacion_cas_edit > option[value="<?php echo $ubicacion_edit ?>"]').attr('selected', 'selected');
+      $('#tipo_dadenda_editar > option[value="<?php echo $tipo_dadenda ?>"]').attr('selected', 'selected');
+      $('#tipo_adenda_edit > option[value="<?php echo $tip_adenda ?>"]').attr('selected', 'selected');
     });
   </script>
 

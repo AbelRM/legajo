@@ -8,7 +8,7 @@
   <?php
   include 'aside.html';
   include 'conexion_pg.php';
-  $id_cas = $_POST['id'];
+  $id_cas = $_GET['id'];
   ?>
 
   <!-- Left Panel -->
@@ -98,11 +98,11 @@
             <!-- --------------------------------------------------------------------------------------------------------- -->
 
             <div class="row">
-              <div class="col-md-5 text-center">
-                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#contrato"><i class="fa fa-lightbulb-o"></i>&nbsp; Agregar contrato</button>
-                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#adenda"><i class="fa fa-lightbulb-o"></i>&nbsp; Agregar adenda</button>
-                <br><br><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#fin_contrato"><i class="fa fa-lightbulb-o"></i>&nbsp; Fin contrato</button>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#fin_adenda"><i class="fa fa-lightbulb-o"></i>&nbsp; Fin adenda</button>
+              <div class="col-md-3 text-center">
+                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#contrato"><i class="fa fa-plus" aria-hidden="true"></i> Contrato</button>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#fin_contrato"><i class="fa fa-ban" aria-hidden="true"></i> Fin contrato</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#adenda"><i class="fa fa-plus" aria-hidden="true"></i> Adenda</button>
+                <br> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#fin_adenda"><i class="fa fa-ban" aria-hidden="true"></i> Fin adenda</button>
 
               </div>
 
@@ -116,36 +116,74 @@
               <label class="mdb-main-label">Example label</label>
               <button class="btn-save btn btn-primary btn-sm">Elegir</button> -->
 
-              <div class="col-md-7 text-right">
+              <div class="col-md-9 text-right">
                 <form action="cas_informeVT.php" method="POST">
                   <div class="row">
-                    <div class="col col-md-4"><label for="selectSm" class=" form-control-label">Elegir N° contrato:</label></div>
-                    <div class="col-12 col-md-4">
+                    <div class="col col-md-3"><label for="selectSm" class=" form-control-label">Elegir N° contrato:</label></div>
+                    <div class="col-12 col-md-6">
                       <select name="nro_contrato" id="nro_contrato" class="form-control-sm form-control">
                         <?php
                         $consulta = "SELECT * FROM cas_contratos WHERE idcas = '$id_cas'";
                         $resultado = pg_query($con, $consulta);
                         while ($array = pg_fetch_array($resultado)) {
-                          echo "<option value=" . $array["id_contrato"] . ">" . $array["nro_contrato"] . "</option> ";
+                          echo "<option value=" . $array["id_contrato"] . ">" . $array["nro_contrato"] . " / " . $array["estado_vt"] .  " / " . $array["fech_registro_vt"] . "</option> ";
                         }
                         ?>
                       </select>
                     </div>
                     <input type="hidden" value="<?php echo $id_cas; ?>" id="id_cas" name="id_cas">
-                    <div class="col-md-4">
-                      <button type="submit" class="btn btn-secondary btn-sm"><i class="fa fa-lightbulb-o"></i>&nbsp; Informe V.T.</button>
+                    <input type="hidden" id="fech_registro_vt" name="fech_registro_vt" value="<?php echo date('d/m/Y'); ?>">
+                    <input type="hidden" id="estado_vt" name="estado_vt" value="REGISTRADO">
+                    <div class="col-md-3">
+                      <button type="submit" class="btn btn-secondary btn-sm"><i class="fa fa-lightbulb-o"></i>&nbsp; Inf. Vacac. T.</button>
                     </div>
                   </div>
                 </form> <br>
 
                 <form action="cas_informeRC.php" method="POST">
-                  <input type="hidden" value="<?php echo $id_cas; ?>" id="id_cas" name="id_cas">
-                  <button type="submit" class="btn btn-secondary btn-sm"><i class="fa fa-lightbulb-o"></i>&nbsp; Informe R.C.</button>
+                  <div class="row">
+                    <div class="col col-md-3"><label for="selectSm" class=" form-control-label">Elegir N° contrato:</label></div>
+                    <div class="col-12 col-md-6">
+                      <select name="nro_contrato" id="nro_contrato" class="form-control-sm form-control">
+                        <?php
+                        $consulta = "SELECT * FROM cas_contratos WHERE idcas = '$id_cas'";
+                        $resultado = pg_query($con, $consulta);
+                        while ($array = pg_fetch_array($resultado)) {
+                          echo "<option value=" . $array["id_contrato"] . ">" . $array["nro_contrato"] . " / " . $array["estado_rc"] . " / " . $array["fecha_registro_rc"] . "</option> ";
+                        }
+                        ?>
+                      </select>
+                    </div>
+                    <input type="hidden" value="<?php echo $id_cas; ?>" id="id_cas" name="id_cas">
+                    <input type="hidden" id="fech_registro_rc" name="fech_registro_rc" value="<?php echo date('d/m/Y'); ?>">
+                    <input type="hidden" id="estado_rc" name="estado_rc" value="REGISTRADO">
+                    <div class="col-md-3">
+                      <button type="submit" class="btn btn-secondary btn-sm"><i class="fa fa-lightbulb-o"></i>&nbsp; Inf. Renov. C.</button>
+                    </div>
+                  </div>
                 </form> <br>
 
                 <form action="cas_constancia.php" method="POST">
-                  <input type="hidden" value="<?php echo $id_cas; ?>" id="id_cas" name="id_cas">
-                  <button type="submit" class="btn btn-secondary btn-sm"><i class="fa fa-lightbulb-o"></i>&nbsp; Constancia de trabajo</button>
+                  <div class="row">
+                    <div class="col col-md-3"><label for="selectSm" class=" form-control-label">Registrado hasta:</label></div>
+                    <div class="col-12 col-md-6">
+                      <select name="nro_contrato" id="nro_contrato" class="form-control-sm form-control">
+                        <?php
+                        $consulta = "SELECT * FROM cas_contratos WHERE idcas = '$id_cas'";
+                        $resultado = pg_query($con, $consulta);
+                        while ($array = pg_fetch_array($resultado)) {
+                          echo "<option value=" . $array["id_contrato"] . ">" . $array["nro_contrato"] . " / " . $array["estado_ct"] . " / " . $array["fecha_registro_ct"] . "</option> ";
+                        }
+                        ?>
+                      </select>
+                    </div>
+                    <input type="hidden" value="<?php echo $id_cas; ?>" id="id_cas" name="id_cas">
+                    <input type="hidden" id="fech_registro_ct" name="fech_registro_ct" value="<?php echo date('d/m/Y'); ?>">
+
+                    <div class="col-md-3">
+                      <button type="submit" class="btn btn-secondary btn-sm"><i class="fa fa-lightbulb-o"></i>&nbsp; Constancia</button>
+                    </div>
+                  </div>
                 </form> <br>
               </div>
 
@@ -175,7 +213,6 @@
                     $cargo = $di_rw['profesion'];
                     $ubicacion = $di_rw['estruc1'];
                     $oficina = $di_rw['oficestr'];
-                    $id_contrato = $di_rw['id_contrato'];
                     $r_renuncia = $di_rw['resol_renuncia'];
                     $f_renuncia = $di_rw['f_renuncia'];
                     $nro_convocatoria = $di_rw['nro_convocatoria'];
@@ -185,13 +222,14 @@
                   ?>
                     <tbody>
                       <tr>
+                        <td style="display: none;"><?php echo $id_contrato; ?></td>
                         <td>CAS N° <?php echo $contrato; ?></td>
                         <td><?php echo $cargo; ?><br><small class="form-text text-muted">Ubicación: <?php echo $ubicacion; ?> <br> Oficina: <?php echo $oficina; ?></small></td>
                         <td>Conv. N° <?php echo $nro_convocatoria; ?></td>
                         <td><small class="form-text text-muted">Inicio : <?php echo $f_inicio; ?> <br> Fin : <?php echo $f_fin; ?>
                             <?php
                             if ($r_renuncia == '') {
-                              echo "No hay renuncia";
+                              echo "</br>No hay renuncia";
                             } else {
                             ?> <br> <b>Renuncia : <?php echo $f_renuncia; ?></b>
                             <?php
@@ -210,10 +248,9 @@
                             <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
                           </form>
 
-                          <a href="#ver<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-success btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Ver folio</a>
+                          <a href="#ver<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-success btn-sm m-1"><i class="fa fa-file-pdf-o"></i> Ver folio</a>
 
-                          <a href="#delete<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
-
+                          <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#borrar_contrato_<?php echo $id_contrato; ?>"><i class="fa fa-trash"></i> Borrar</button>
                         </td>
 
                       </tr>
@@ -244,9 +281,12 @@
                           </td>
                           <td>Meta adenda: <?php echo $meta_adenda; ?> </td>
                           <td>
-                            <a href="#edit<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-warning btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>&nbsp;
+                            <form method="POST" action="modal_editar_adenda.php">
+                              <input type="hidden" value="<?php echo $id_adenda; ?>" name="id_adenda">
+                              <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i> Editar</button>
+                            </form>
 
-                            <a href="#delete<?php echo $id_contrato; ?>" data-toggle="modal" class="btn btn-danger btn-sm m-1"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#borrar_adenda_<?php echo $id_adenda; ?>"><i class="fa fa-trash"></i> Borrar</button>
 
                           </td>
                         </tr>
@@ -265,120 +305,69 @@
     <!-- /# column -->
   </div><!-- .content -->
 
-  <!-- Ventana Editar Registros CRUD -->
-  <div class="modal fade" id="myModalupdate<?php echo $id_contrato; ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+  <!-- DELETE MODAL -->
+  <div class="modal fade" id="borrar_contrato_<?php echo $id_contrato; ?>">
+    <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="mediumModalLabel">Editar Empleado</h4>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid" style="font-size:12px;">
-            <form method="POST" action="EditarRegistro.php?id=<?php echo $id_contrato; ?>">
-              <div class="row form-group">
-                <div class="col-md-6">
-                  <label for="exampleFormControlInput1">N° Convocatoria:</label>
-                  <input type="text" style="font-size:12px;" class="form-control" name="convocatoria" value="<?php echo $nro_convocatoria; ?>">
-                </div>
-                <div class="col-md-6">
-                  <label for="exampleFormControlInput1">CAS N°:</label>
-                  <input type="text" style="font-size:12px;" class="form-control" name="nombres" value="<?php echo $contrato; ?>">
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-6">
-                  <label for="exampleFormControlInput1">Fecha inicio:</label>
-                  <input type="date" style="font-size:12px;" class="form-control" name="fech_inicio" value="<?php echo $f_inicio; ?>">
-                </div>
-                <div class="col-md-6">
-                  <label for="exampleFormControlInput1">Fecha término:</label>
-                  <input type="date" style="font-size:12px;" class="form-control" name="fech_fin" value="<?php echo $f_fin; ?>">
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-6">
-                  <label for="exampleFormControlInput1">Remuneración:</label>
-                  <input type="text" style="font-size:12px;" class="form-control" name="remuneracion" value="<?php echo $remuneracion; ?>">
-                </div>
-                <div class="col-md-6">
-                  <label for="exampleFormControlInput1">Cargo:</label>
-                  <select style="font-size:12px;" name="cargo" id="cargo" class="form-control">
-                    <option value="<?php echo $cargo; ?>"><?php echo $cargo; ?></option>
-                    <?php
-                    $sql = "SELECT * FROM cargo_oprof";
-                    $res = pg_query($con, $sql);
-                    while ($rw = pg_fetch_array($res)) {
-                      echo "<option value=" . $rw["cod_prof"] . ">" . $rw["profesion"] . "</option> ";
-                    }
-                    ?>
-                  </select>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <label class="control-label" style="position:relative; top:7px;">Ubicación:</label>
-                </div>
-                <div class="col-md-12">
-                  <select style="font-size:12px;" name="ubicacion" id="ubicacion" class="form-control standardSelect">
-                    <option value="<?php echo $ubicacion; ?>"><?php echo $ubicacion . "-" . $oficina; ?></option>
-                    <?php
-                    $sql = "SELECT * FROM t_ubicas";
-                    $res = pg_query($con, $sql);
-                    while ($rw = pg_fetch_array($res)) {
-                      echo "<option value=" . $rw["codofic"] . ">" . $rw["oficestr"] . " - " . $rw["estruc1"] . "</option> ";
-                    }
-                    ?>
-                  </select>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-6">
-                  <label for="exampleFormControlInput1">Fuente financiamiento:</label>
-                  <input type="text" style="font-size:12px;" class="form-control" name="fuente" value="<?php echo $fuente; ?>">
-                </div>
-                <div class="col-md-6">
-                  <label for="exampleFormControlInput1">Meta:</label>
-                  <input type="text" style="font-size:12px;" class="form-control" name="meta" value="<?php echo $meta; ?>">
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-sm-3">
-                  <label class="control-label" style="position:relative; top:7px;">Tipo contrato:</label>
-                </div>
-                <div class="col-sm-9">
-                  <input type="text" style="font-size:12px;" class="form-control" name="tipo_contrato" value="<?php echo $tipo_contrato; ?>">
-                </div>
-              </div>
+        <div class="modal-header bg-danger text-white">
+          <div class="row">
+            <div class="col-md-8">
+              <h5 class="modal-title" id="exampleModalLabel">ELIMINAR CONTRATO</h5>
+            </div>
+            <div class="col-md-4">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-          <button type="submit" name="editar" class="btn btn-success"><span class="glyphicon glyphicon-check"></span> Actualizar Ahora</a>
-            </form>
-        </div>
+        <form action="procesos/borrar_contrato.php" method="POST">
 
+          <div class="modal-body">
+
+            <input type="hidden" name="id_contrato" value="<?php echo $id_contrato ?>">
+            <h4>¿Desea eliminar el registro de formación?</h4>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn btn-light" data-dismiss="modal">NO</button>
+            <button type="submit" class="btn btn-danger" name="deleteData">SI</button>
+          </div>
+
+        </form>
       </div>
     </div>
   </div>
 
-  <!-- Borrar -->
-  <div class="modal fade" id="delete_<?php echo $id_contrato; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <!-- DELETE MODAL -->
+  <div class="modal fade" id="borrar_adenda_<?php echo $id_adenda; ?>">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">Borrar Empleado</h4>
+        <div class="modal-header bg-danger text-white">
+          <div class="row">
+            <div class="col-md-8">
+              <h5 class="modal-title" id="exampleModalLabel">ELIMINAR ADENDA</h5>
+            </div>
+            <div class="col-md-4">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="modal-body">
-          <p class="text-center">¿Esta seguro de Borrar el registro?</p>
-          <h2 class="text-center"><?php echo $row['Nombres'] . ' ' . $row['Apellidos']; ?></h2>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-          <a href="BorrarRegistro.php?id=<?php echo $row['idEmp']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Si</a>
-        </div>
+        <form action="procesos/borrar_adenda.php" method="POST">
 
+          <div class="modal-body">
+            <input type="hidden" name="id_adenda" value="<?php echo $id_adenda ?>">
+            <h4>¿Desea eliminar el registro de formación?</h4>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn btn-light" data-dismiss="modal">NO</button>
+            <button type="submit" class="btn btn-danger" name="deleteData">SI</button>
+          </div>
+
+        </form>
       </div>
     </div>
   </div>
@@ -393,11 +382,11 @@
 
   <script src="assets/js/otros/jquery.min.js"></script>
   <script src="assets/js/otros/popper.min.js"></script>
-  <script src="assets/js/otros/bootstrap.min.js"></script>
+  <script src="assets/js/otros/bootstrap.js"></script>
   <script src="assets/js/otros/jquery.matchHeight.min.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/cas_funciones.js"></script>
-  <script src="assets/js/otros/jquery-3.2.1.min.js"></script>
+  <script src="assets/js/otros/jquery.js"></script>
   <script src="assets/js/lib/chosen/chosen.jquery.min.js"></script>
   <script src="assets/js/mdb.js"></script>
 
@@ -407,6 +396,26 @@
         disable_search_threshold: 10,
         no_results_text: "Oops, no ha sido encontrado!",
         width: "100%"
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('.deleteBtn').on('click', function() {
+
+        $('#deleteModal').modal('show');
+
+        // Get the table row data.
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function() {
+          return $(this).text();
+        }).get();
+
+        console.log(data);
+
+        $('#deleteId').val(data[0]);
+
       });
     });
   </script>
